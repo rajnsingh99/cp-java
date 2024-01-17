@@ -1,12 +1,13 @@
 package Difficulty800;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProblemSet800 {
     public static void main(String[] args) {
         System.out.println("CodeForce ProblemSet 800 \n");
+        bearAndBigBrother(1, 1);
     }
 
     private static void watermelon(int weight) {
@@ -120,4 +121,55 @@ public class ProblemSet800 {
         System.out.println("Output -> " + output);
     }
 
+    private static void wordCapitalization(String word) {
+        if (word.charAt(0) != word.toUpperCase().charAt(0)) {
+            char[] newWord = new char[word.length()];
+            for (int i = 0; i < word.length(); i++) {
+                if (i == 0) {
+                    String tempWord = new String(word.toUpperCase());
+                    newWord[0] = tempWord.charAt(0);
+                } else {
+                    newWord[i] = word.charAt(i);
+                }
+            }
+
+            System.out.println(newWord);
+        } else {
+            System.out.println("Default " + word);
+        }
+    }
+
+   private static void boyOrGirl(String word) {
+       Set<Character> uniqueChar = new HashSet<>();
+       for (Character c : word.toLowerCase().toCharArray()) {
+           uniqueChar.add(c);
+       }
+
+       System.out.println((uniqueChar.size() % 2 == 0) ? "CHAT WITH HER!" : "IGNORE HIM!");
+   }
+
+   private static void stonesOnTheTable(String input) {
+        char currColorCode = input.charAt(0);
+        int deletedStone = 0;
+        for (int i = 1; i< input.length(); i++) {
+            if (currColorCode == input.charAt(i)) {
+                ++deletedStone;
+            } else {
+                currColorCode = input.charAt(i);
+            }
+        }
+
+        System.out.println(deletedStone);
+   }
+
+   private static void bearAndBigBrother(int a, int b) {
+        int years = 0;
+        while (a <= b) {
+            a *= 3;
+            b *= 2;
+            ++years;
+        }
+
+        System.out.println(years);
+   }
 }
