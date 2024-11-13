@@ -1,4 +1,4 @@
-package Difficulty800;
+package DSA.Difficulty800;
 
 import java.util.HashSet;
 import java.util.List;

@@ -1,4 +1,4 @@
-package Difficulty800;
+package DSA.Difficulty800;
 
 public class SortingUtils {
 

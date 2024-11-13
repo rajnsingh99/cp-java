@@ -1,4 +1,4 @@
-package Sorting;
+package DSA.Sorting;
 
 public class HeapSort {
 
