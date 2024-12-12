@@ -1,48 +1,70 @@
 package DSA.Graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Traversal {
 
-    public static void main(String[] args) {
-        // Number of vertices in the graph
-        int V = 5;
+    public static void main(String[] args)
+    {
+        int V = 5; // Number of vertices in the graph
 
-        // Adjacency list representation of the graph
-        List<List<Integer>> adj = new ArrayList<>(V);
+        // Create an adjacency list for the graph
+        List<List<Integer> > adj = new ArrayList<>(V);
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
 
-        // Add edges to the graph
-        addEdge(adj, 0, 1);
-        addEdge(adj, 0, 2);
-        addEdge(adj, 1, 3);
-        addEdge(adj, 1, 4);
-        addEdge(adj, 2, 4);
+        // Define the edges of the graph
+        int[][] edges = {
+                { 1, 2 }, { 1, 0 }, { 2, 0 }, { 2, 3 }, { 2, 4 }
+        };
 
-        // Perform BFS traversal starting from vertex 0
-        System.out.println("BFS starting from 0:");
-        bfsTraversal(adj, 0);
+        // Populate the adjacency list with edges
+        for (int[] e : edges) {
+            addEdge(adj, e[0], e[1]);
+        }
+
+        int source = 1;
+        System.out.println("DFS from source: " + source);
+        for (List<Integer> vertices : adj) {
+            System.out.println(vertices);
+        }
     }
 
-    private static void bfsTraversal(List<List<Integer>> adjList, int node) {
-        List<Integer> visited = new ArrayList<>();
-        bfs(adjList, visited, 0);
+    // Function to add an edge to the adjacency list
+    static void addEdge(List<List<Integer> > adj,
+                        int s, int t){
+        // Add edge from vertex s to t
+        adj.get(s).add(t);
     }
 
-    private static void bfs(List<List<Integer>> adjList, List<Integer> visited, int node) {
-        System.out.println("Visited " + node);
-        visited.set(node, 1);
+    private static void bfsTraversal(Map<Integer, List<Integer>> graph) {
+        boolean[] visited = bfs(graph, 0);
+        System.out.println(Arrays.toString(visited));
+    }
 
+    private static boolean[] bfs(Map<Integer, List<Integer>> graph, int node) {
+        boolean[] visited = new boolean[graph.size()];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()) {
+            int curr = queue.poll();
+            System.out.println(curr);
+            visited[curr] = true;
+            for (Integer vertices : graph.get(curr)) {
+                if(!visited[vertices]) {
+                    queue.add(vertices);
+                }
+            }
+        }
 
+        return visited;
     }
 
 
-    // Function to add an edge to the graph
-    static void addEdge(List<List<Integer>> adj, int u, int v) {
-        adj.get(u).add(v);
-        adj.get(v).add(u); // Undirected graph
+
+    private static void dfs() {
+
     }
+
 }
