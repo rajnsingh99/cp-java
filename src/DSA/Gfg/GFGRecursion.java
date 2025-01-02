@@ -1,4 +1,4 @@
-package DSA.Practice;
+package DSA.Gfg;
 
 import java.util.*;
 
