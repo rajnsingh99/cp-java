@@ -1,11 +1,16 @@
 package DSA.Leetcode;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StreakBatch1 {
 
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
-        System.out.println(mergeAlternately("gmumn", "azia"));
+        int[] candies = {2,3,5,1,3};
+        int extra = 1;
+        System.out.println(kidsWithCandies(candies, extra));
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -28,6 +33,26 @@ public class StreakBatch1 {
         }
 
         return builder.toString();
+    }
+
+    public static List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        int highestCandy = Integer.MIN_VALUE;
+        List<Boolean> result = new ArrayList<>();
+        for (int candy : candies) {
+            if (candy > highestCandy) {
+                highestCandy = candy;
+            }
+        }
+
+        for (int candy : candies) {
+            if (candy + extraCandies >= highestCandy) {
+                result.add(true);
+            } else {
+                result.add(false);
+            }
+        }
+
+        return result;
     }
 
 }
