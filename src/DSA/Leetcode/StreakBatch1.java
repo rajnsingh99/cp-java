@@ -1,16 +1,16 @@
 package DSA.Leetcode;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreakBatch1 {
 
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
-        int[] candies = {2,3,5,1,3};
-        int extra = 1;
-        System.out.println(kidsWithCandies(candies, extra));
+        System.out.println(reverseVowels("IceCreAm"));
+
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -53,6 +53,45 @@ public class StreakBatch1 {
         }
 
         return result;
+    }
+
+    public static boolean canPlaceFlowers(int[] flowerbed, int n) {
+        for (int i = 1; i < flowerbed.length - 1; i++) {
+            if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) {
+                flowerbed[i] = 1;
+                --n;
+            }
+        }
+
+        return n <= 0;
+    }
+
+
+    public static String reverseVowels(String s) {
+        Character[] vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+        Set<Character> vowelSet = new HashSet<>(Arrays.asList(vowels));
+        char[] str = s.toCharArray();
+        int start = 0;
+        int end = s.length() - 1;
+        while (start < end) {
+            if (vowelSet.contains(str[start]) && vowelSet.contains(str[end])) {
+                // swap;
+                char temp = str[start];
+                str[start] = str[end];
+                str[end] = temp;
+                --end;
+                ++start;
+            } else if (vowelSet.contains(str[start])) {
+                --end;
+            } else if (vowelSet.contains(str[end])) {
+                ++start;
+            } else {
+                --end;
+                ++start;
+            }
+        }
+
+        return String.valueOf(str);
     }
 
 }
