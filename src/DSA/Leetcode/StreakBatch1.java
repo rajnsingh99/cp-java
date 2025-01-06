@@ -1,16 +1,13 @@
 package DSA.Leetcode;
 
-
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class StreakBatch1 {
 
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
-        System.out.println(reverseVowels("IceCreAm"));
-
+        int[] flower = new int[]{1, 0, 0, 0, 1, 0, 0};
+        System.out.println(Arrays.toString(productExceptSelf(new int[]{-1,1,0,-3,3})));
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -56,11 +53,21 @@ public class StreakBatch1 {
     }
 
     public static boolean canPlaceFlowers(int[] flowerbed, int n) {
+        if (flowerbed[0] == 0 && flowerbed[1] == 0) {
+            flowerbed[0] = 1;
+            --n;
+        }
+
         for (int i = 1; i < flowerbed.length - 1; i++) {
             if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) {
                 flowerbed[i] = 1;
                 --n;
             }
+        }
+
+        if (flowerbed[flowerbed.length - 1] == 0 && flowerbed[flowerbed.length - 2] == 0) {
+            flowerbed[flowerbed.length - 1] = 1;
+            --n;
         }
 
         return n <= 0;
@@ -92,6 +99,43 @@ public class StreakBatch1 {
         }
 
         return String.valueOf(str);
+    }
+
+    public static String reverseWords(String s) {
+        List<String> wordList = new ArrayList<>();
+        s += " ";
+        int start = -1;
+        int end = -1;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (start < 0 && s.charAt(i) != ' ') {
+                start = i;
+                end = i;
+            }
+
+            if (start >= 0 && s.charAt(i) != ' ') {
+                ++end;
+            }
+
+            if (end >= 0 && s.charAt(i) == ' ') {
+                // extract word
+                String word = s.substring(start, end);
+                wordList.add(word);
+                start = -1;
+                end = -1;
+            }
+        }
+
+        StringBuilder finalStr = new StringBuilder();
+        for (int i = wordList.size() - 1; i >= 0; i--) {
+            if (i == 0) {
+                finalStr.append(wordList.get(i));
+            } else {
+                finalStr.append(wordList.get(i)).append(" ");
+            }
+        }
+
+        return finalStr.toString();
     }
 
 }
