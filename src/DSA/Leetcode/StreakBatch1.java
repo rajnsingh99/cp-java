@@ -6,8 +6,7 @@ public class StreakBatch1 {
 
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
-        int[] flower = new int[]{1, 0, 0, 0, 1, 0, 0};
-        System.out.println(Arrays.toString(productExceptSelf(new int[]{-1,1,0,-3,3})));
+        int[] flower = new int[]{1,5,0,4,1,3};
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -136,6 +135,21 @@ public class StreakBatch1 {
         }
 
         return finalStr.toString();
+    }
+
+    public static int[] productExceptSelf(int[] nums) {
+        int[] result = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            int product = 1;
+            for (int j = 0; j < nums.length; j++) {
+                if (j != i) {
+                    product *= nums[j];
+                }
+            }
+            result[i] = product;
+        }
+
+        return result;
     }
 
 }
