@@ -7,6 +7,7 @@ public class StreakBatch1 {
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
         int[] flower = new int[]{1,5,0,4,1,3};
+        System.out.println(compress(new char[]{'a','b','b','b','b','b','b','b','b','b','b','b','b'}));
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -150,6 +151,28 @@ public class StreakBatch1 {
         }
 
         return result;
+    }
+
+    public static int compress(char[] chars) {
+        Map<String, Integer> charMap = new HashMap<>();
+        for (Character aChar : chars) {
+            if (charMap.containsKey(String.valueOf(aChar))) {
+                Integer count = charMap.get(String.valueOf(aChar));
+                charMap.put(String.valueOf(aChar), ++count);
+            } else {
+                charMap.put(String.valueOf(aChar), 1);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (String key : charMap.keySet()) {
+            result.append(key);
+            if (charMap.get(key) != 1) {
+                result.append(charMap.get(key));
+            }
+        }
+
+        return result.length();
     }
 
 }
