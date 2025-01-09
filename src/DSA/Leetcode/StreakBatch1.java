@@ -6,8 +6,8 @@ public class StreakBatch1 {
 
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
-        int[] flower = new int[]{1,5,0,4,1,3};
-        System.out.println(compress(new char[]{'a','b','b','b','b','b','b','b','b','b','b','b','b'}));
+        int[] flower = new int[]{0};
+        System.out.println(isSubsequence("rjufvjafbxnbgriwgokdgqdqewn", "mjmqqjrmzkvhxlyruonekhhofpzzslupzojfuoztvzmmqvmlhgqxehojfowtrinbatjujaxekbcydldglkbxsqbbnrkhfdnpfbuaktupfftiljwpgglkjqunvithzlzpgikixqeuimmtbiskemplcvljqgvlzvnqxgedxqnznddkiujwhdefziydtquoudzxstpjjitmiimbjfgfjikkjycwgnpdxpeppsturjwkgnifinccvqzwlbmgpdaodzptyrjjkbqmgdrftfbwgimsmjpknuqtijrsnwvtytqqvookinzmkkkrkgwafohflvuedssukjgipgmypakhlckvizmqvycvbxhlljzejcaijqnfgobuhuiahtmxfzoplmmjfxtggwwxliplntkfuxjcnzcqsaagahbbneugiocexcfpszzomumfqpaiydssmihdoewahoswhlnpctjmkyufsvjlrflfiktndubnymenlmpyrhjxfdcq"));
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -175,4 +175,42 @@ public class StreakBatch1 {
         return result.length();
     }
 
+    public static boolean increasingTriplet(int[] nums) {
+        int count = 1;
+        for(int i = 0; i < nums.length; i++) {
+            int curMin = nums[i];
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] > curMin) {
+                    curMin = nums[j];
+                    ++count;
+                }
+            }
+
+            if (count >= 3) {
+                break;
+            } else {
+                count = 1;
+            }
+        }
+
+        return count >= 3;
+    }
+
+    public static int[] moveZeroes(int[] nums) {
+        int[] result = new int[nums.length];
+        int start = 0;
+        int end = nums.length - 1;
+        for (int num : nums) {
+            if (num == 0) {
+                result[end] = 0;
+                end--;
+            } else {
+                result[start] = num;
+                start++;
+            }
+        }
+
+        System.arraycopy(result, 0, nums, 0, result.length);
+        return nums;
+    }
 }
