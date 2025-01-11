@@ -213,4 +213,23 @@ public class StreakBatch1 {
         System.arraycopy(result, 0, nums, 0, result.length);
         return nums;
     }
+
+    static int[][] memo;
+    public static boolean isSubsequence(String s, String t) {
+        memo = new int[s.length()][t.length()];
+        int subsequenceLength =subsequenceLength(s, t, s.length() - 1, t.length() -1);
+        return s.length() == subsequenceLength;
+    }
+
+    private static int subsequenceLength(String s, String t, int m, int n) {
+        if (m < 0 || n < 0) {
+            return 0;
+        }
+
+        if (s.charAt(m) == t.charAt(n)) {
+            return 1 + subsequenceLength(s, t, m - 1, n -1);
+        } else {
+            return Math.max(subsequenceLength(s, t , m - 1, n), subsequenceLength(s, t, m, n- 1));
+        }
+    }
 }
