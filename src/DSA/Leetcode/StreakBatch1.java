@@ -1,13 +1,21 @@
 package DSA.Leetcode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreakBatch1 {
 
     public static void main(String[] args) {
         System.out.println("Leetcode Streak batch-1");
         int[] flower = new int[]{0};
-        System.out.println(isSubsequence("rjufvjafbxnbgriwgokdgqdqewn", "mjmqqjrmzkvhxlyruonekhhofpzzslupzojfuoztvzmmqvmlhgqxehojfowtrinbatjujaxekbcydldglkbxsqbbnrkhfdnpfbuaktupfftiljwpgglkjqunvithzlzpgikixqeuimmtbiskemplcvljqgvlzvnqxgedxqnznddkiujwhdefziydtquoudzxstpjjitmiimbjfgfjikkjycwgnpdxpeppsturjwkgnifinccvqzwlbmgpdaodzptyrjjkbqmgdrftfbwgimsmjpknuqtijrsnwvtytqqvookinzmkkkrkgwafohflvuedssukjgipgmypakhlckvizmqvycvbxhlljzejcaijqnfgobuhuiahtmxfzoplmmjfxtggwwxliplntkfuxjcnzcqsaagahbbneugiocexcfpszzomumfqpaiydssmihdoewahoswhlnpctjmkyufsvjlrflfiktndubnymenlmpyrhjxfdcq"));
+        maxOperations(new int[]{2,2,2,3,1,1,4,1}, 4);
+
+        List<String> stringList = new ArrayList<>();
+        stringList.add("raj");
+        stringList.add("narayan");
+        stringList.add("singh");
+        stringList.add("1Pinnacle");
+        System.out.println(stringList.stream().filter(str -> str.matches("^\\d.*")).toList());
     }
 
     public static String mergeAlternately(String word1, String word2) {
@@ -230,6 +238,22 @@ public class StreakBatch1 {
             return 1 + subsequenceLength(s, t, m - 1, n -1);
         } else {
             return Math.max(subsequenceLength(s, t , m - 1, n), subsequenceLength(s, t, m, n- 1));
+        }
+    }
+
+    public static void maxOperations(int[] nums, int k) {
+        System.out.println(maxOpsSol(nums, k, 0, nums.length - 1));
+    }
+
+    private static int maxOpsSol(int[] nums, int k, int i, int j) {
+        if (i >= j) {
+            return 0;
+        }
+
+        if (nums[i] + nums[j] == k) {
+            return 1 + maxOpsSol(nums, k, i + 1, j - 1);
+        } else {
+            return Math.max(maxOpsSol(nums, k, i + 1, j), maxOpsSol(nums, k, i, j - 1));
         }
     }
 }
